@@ -35,28 +35,19 @@ module.exports.showListing = async(req,res)=>{
 module.exports.newListing = async(req,res,next) =>{
     // let{title,description,image,price,country,location,} = req.body;
     // let listing = req.body.listing;
- //    if(!req.body.listing){
- //     throw new expressError(400,"Send Valid data")
- //    }
- 
-     const newListing = new Listing(req.body.listing);
-     // if(!req.body.listing.title){                         listing validation
-     //     throw new expressError(400,"Title is missing")
-     //    }
-     //    if(!req.body.listing.description){
-     //     throw new expressError(400,"Description is missing")
-     //    }
-     //    if(!req.body.listing.location){
-     //     throw new expressError(400,"Location is missing")
-     //    }
-     //    if(!req.body.listing.price){
-     //     throw new expressError(400,"Price is missing")
-     //    }
-     newListing.owner= req.user._id;
-     await newListing.save();
-     req.flash("success","New Listing is Created Successfully");   
-     res.redirect("/listings");
-  
+    //    if(!req.body.listing){
+    //     throw new expressError(400,"Send Valid data")
+    //    }
+    
+    let url = req.file.path;
+    let filename = req.file.filename;
+    const newListing = new Listing(req.body.listing);
+    newListing.owner= req.user._id;
+    newListing.image = {url,filename};
+    await newListing.save();
+    req.flash("success","New Listing is Created Successfully");   
+    res.redirect("/listings");
+
  };
 
 
