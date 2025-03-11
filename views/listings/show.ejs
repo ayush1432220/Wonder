@@ -1,0 +1,174 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<div class="container pt-5">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card shadow-lg p-3">
+                <img src="<%= listing.image %>" class="card-img-top img-fluid"
+                    alt="Listing Image"
+                    style="height: 400px; object-fit: cover;">
+
+                <div class="card-body px-4">
+                    <h2 class="card-title mb-4"><%= listing.title %></h2>
+                    <div class="user">
+                        <h4><i>Created By :</i><b> <%= listing.owner.username
+                                %></b></h4>
+                    </div>
+                    <div class="listing-details mb-4">
+                        <p class="card-text text-muted"><%= listing.description
+                            %></p>
+                        <div
+                            class="d-flex justify-content-between align-items-center">
+                            <h4 class="text-success">₹<%=
+                                listing.price.toLocaleString("en-IN") %></h4>
+                            <h5><i
+                                    class="fas fa-map-marker-alt text-danger"></i>
+                                <%= listing.location %></h5>
+                        </div>
+                    </div>
+
+                    <% if(currUser && listing.owner._id.equals(currUser._id))
+                    {%>
+                    <div class="d-flex gap-2 mb-4">
+                        <a href="/listings/<%= listing._id %>/edit"
+                            class="btn btn-warning">
+                            <i class="fas fa-edit"></i> Edit Listing
+                        </a>
+                        <form
+                            action="/listings/<%= listing._id %>?_method=delete"
+                            method="post" class="d-inline">
+                            <button class="btn btn-danger">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </form>
+                    </div>
+                    <% } %>
+
+                    <hr>
+                    <%if(currUser){ %>
+                    <div class="reviews-section mt-4">
+                        <h3 class="mb-3">Leave a Review</h3>
+                        <form action="/listings/<%=listing._id%>/reviews"
+                            method="post" class="needs-validation" novalidate>
+                            <div class="mb-3">
+                                <label for="rating"
+                                    class="form-label"><b>Rating :</b></label>
+                                <div class="d-flex align-items-center gap-2">
+                                    <fieldset class="starability-grow">
+                                        <input type="radio" id="first-rate1"
+                                            name="review[rating]" value="1" />
+                                        <label for="first-rate1"
+                                            title="Terrible">1
+                                            star</label>
+                                        <input type="radio" id="first-rate2"
+                                            name="review[rating]" value="2" />
+                                        <label for="first-rate2"
+                                            title="Not good">2
+                                            stars</label>
+                                        <input type="radio" id="first-rate3"
+                                            name="review[rating]" value="3" />
+                                        <label for="first-rate3"
+                                            title="Average">3
+                                            stars</label>
+                                        <input type="radio" id="first-rate4"
+                                            name="review[rating]" value="4" />
+                                        <label for="first-rate4"
+                                            title="Very good">4
+                                            stars</label>
+                                        <input type="radio" id="first-rate5"
+                                            name="review[rating]" value="5" />
+                                        <label for="first-rate5"
+                                            title="Amazing">5
+                                            stars</label>
+                                    </fieldset>
+
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="comment" class="form-label">Your
+                                    Comment</label>
+                                <textarea name="review[comment]" id="comment"
+                                    rows="4" required
+                                    class="form-control"></textarea>
+                                <div class="invalid-feedback">Comment is
+                                    required</div>
+
+                            </div>
+                            <button type="submit"
+                                class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i> Submit
+                                Review</button>
+                        </form>
+                    </div>
+                    <hr>
+                    <% } %>
+                    <div class="reviews-section mt-4">
+                        <h3 class="mb-3">Reviews</h3>
+
+                        <% for (let review of listing.reviews) { %>
+                        <div
+                            class="card mb-3 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="card-body">
+                                <div
+                                    class="d-flex justify-content-between align-items-start">
+                                    <div class="d-flex gap-3">
+                                        <div class="user-avatar">
+                                            <i
+                                                class="fas fa-user-circle fa-2x text-secondary"></i>
+                                        </div>
+
+                                        <div class="review-content">
+                                            <h6
+                                                class="mb-1 fw-bold"><%=review.author.username
+                                                %></h6>
+                                            <div class="rating mb-2">
+                                                <% for (let i = 0; i <
+                                                review.rating; i++) { %>
+                                                <i
+                                                    class="fas fa-star text-warning"></i>
+                                                <% } %>
+                                                <% for (let i = review.rating; i
+                                                < 5; i++) { %>
+                                                <i
+                                                    class="far fa-star text-warning"></i>
+                                                <% } %>
+                                            </div>
+                                            <p
+                                                class="review-text text-muted mb-1"><%=
+                                                review.comment %></p>
+                                            <small class="text-muted">
+                                                <i
+                                                    class="far fa-clock me-1"></i>
+                                                <%=
+                                                review.createdAt.toLocaleDateString()
+                                                %>
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <% if(currUser &&
+                                    review.author._id.equals(currUser._id)) { %>
+                                    <form method="post"
+                                        action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE"
+                                        class="ms-auto">
+                                        <button type="submit"
+                                            class="btn btn-sm btn-outline-danger">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+
+                    </div>
+
+                    <script>
+    // Display rating value dynamically
+    const ratingInput = document.getElementById('rating');
+    const ratingValue = document.getElementById('ratingValue');
+    ratingInput.addEventListener('input', () => {
+      ratingValue.textContent = ratingInput.value;
+    });
+</script>

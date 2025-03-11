@@ -1,0 +1,65 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<div class="row">
+    <div class="col-8 offset-2">
+        <form method="POST" action="/listings/" novalidate
+            class="needs-validation"
+            enctype="multipart/form-data">
+            <br>
+            <h1>New List Form</h1>
+            <br>
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" name="listing[title]"
+                    placeholder="Enter the title" class="form-control" required>
+                <div class="invalid-feedback">Title is required</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <input type="text" name="listing[description]"
+                    placeholder="Enter the Description" class="form-control"
+                    required>
+                <div class="invalid-feedback">Description should be Valid!</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="Price" class="form-label">Price</label>
+                <input type name="listing[price]"
+                    placeholder="Enter the price" class="form-control" required>
+                <div class="invalid-feedback">Price should be Valid!</div>
+
+            </div>
+            <div class="mb-3">
+                <label for="location" class="form-label">Location</label>
+                <input type="text" name="listing[location]"
+                    placeholder="Enter the Location" class="form-control"
+                    required>
+                <div class="invalid-feedback">Location should be Valid!</div>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input type="file" name="listing[image]"
+                    class="form-control"
+                    required>
+
+                <div class="invalid-feedback">Image should should be
+                    Valid!</div>
+
+            </div>
+            <div class="mb-3">
+                <label for="country" class="form-label">Country Name</label>
+                <input type="text" name="listing[country]"
+                    placeholder="Enter the Country Name" class="form-control"
+                    required>
+                <div class="invalid-feedback">Country Name should be
+                    Valid!</div>
+
+            </div>
+            <br><br>
+            <button class="subForm">Submit</button>
+            <br><br>
+
+        </form>
+
+    </div>
+</div>

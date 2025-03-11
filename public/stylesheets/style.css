@@ -1,0 +1,105 @@
+*{
+    margin: 0;
+    padding: 0;
+   
+}
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+}
+.container{
+    flex: 1;
+
+}
+.navbar{
+    height: 5rem;
+    background-color: white;
+}
+.fa-compass{
+    color: #fe424d ;
+    font-size: 2rem ;
+}
+.nav-link{
+    color: #222222 !important;
+    font-size: 1.2rem !important;
+    font-weight: 500 !important;
+}
+.f-info{
+    font-size: 1.2rem;
+    height: 8rem;
+    display: flex;   
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    background-color: whitesmoke;
+    width: 100%;
+    position: sticky ;
+    bottom: 0;
+    left: 0;
+    
+}
+.f-info-links a{
+    text-decoration: none;
+    color: #222222 ;
+    margin: .3rem;
+
+}
+.f-info-links a:hover{
+    text-decoration: underline;
+}
+.socials .fa-brands{
+    font-size: 2rem;
+    margin: .5rem;
+}
+.card{
+    border:  none !important;
+    margin-bottom: 1rem !important;
+}
+.card-body{
+    padding: 0 !important;
+}
+
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+.row{
+
+   
+}
+.row a{
+    text-decoration: none;
+}
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: .3;
+    background-color: white;
+}
+.subForm{
+    border: none;
+    border-radius: 1rem;
+    padding:.5rem 1.5rem;
+    color: black;
+    font-weight: 500;
+    background-color: #fe424d;
+}
+.delForm{
+    background-color: black;
+    color: white;
+}
+.card-body a{
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    
+}
+.subCard{
+    display: flex;
+    justify-content: space-around;
+}
+

@@ -1,0 +1,31 @@
+<nav
+    class="navbar navbar-expand-md bg-light border-bottom sticky-top shadow-sm">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold text-primary" href="#">
+            <i class="fa-regular fa-compass me-1"></i> WanderLust
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ms-auto">
+                <!-- ms-auto pushes to the right -->
+                <a class="nav-link px-3 py-2 me-md-2 nav-link-hover"
+                    href="/listings">Home</a>
+                <a class="nav-link px-3 py-2 me-md-2 nav-link-hover"
+                    href="/listings/new">Add New Listings</a>
+                <% if (!isLoggedIn) { %>
+                <a class="nav-link px-3 py-2 me-md-2 nav-link-hover"
+                    href="/user/login">Login/Register</a>
+                <% } %>
+                <% if(isLoggedIn){%>
+                <a class="nav-link px-3 py-2 me-md-2 nav-link-hover"
+                    href="/user/logout">Logout</a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</nav>
