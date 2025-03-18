@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-8 offset-2">
         <form method="POST" action="/listings/<%= listing._id %>?_method=PUT"
-            class="needs-validation" novalidate>
+            class="needs-validation" novalidate enctype="multipart/form-data">
             <br>
             <h1>Edit List Form</h1>
             <br>
@@ -19,7 +19,18 @@
                 <input type="text" name="listing[description]"
                     value="<%= listing.description %>" class="form-control"
                     required>
-                <div class="invalid-Feedback">Description should be Valid!</div>
+                <div class="invalid-feedback">Description should be Valid!</div>
+
+            </div>
+            <div>
+                <img src="<%= originalUrl %>" alt="Image">
+            </div>
+
+            <div class="mb-3">
+                <label for="image" class="form-label">Upload New Image</label>
+                <input type="file" name="listing[image]"
+                    class="form-control">
+                <div class="invalid-feedback">Image is required</div>
 
             </div>
             <div class="row">

@@ -41,13 +41,13 @@ module.exports.newListing = async(req,res,next) =>{
     
     let url = req.file.path;
     let filename = req.file.filename;
-    const newListing = new Listing(req.body.listing);
-    newListing.owner= req.user._id;
-    newListing.image = {url,filename};
-    await newListing.save();
-    req.flash("success","New Listing is Created Successfully");   
-    res.redirect("/listings");
-
+     const newListing = new Listing(req.body.listing);
+     newListing.owner= req.user._id;
+     newListing.image = {url,filename};
+     await newListing.save();
+     req.flash("success","New Listing is Created Successfully");   
+     res.redirect("/listings");
+  
  };
 
 
@@ -60,7 +60,10 @@ module.exports.newListing = async(req,res,next) =>{
         req.flash("error","Listing not found");
         return res.redirect("/listings");
     }
-    res.render("listings/update.ejs",{listing});
+    let originalUrl = listing.image.url;
+    originalUrl = originalUrl.replace("/upload","/upload/h_300,w_250");
+    console.log(originalUrl);
+    res.render("listings/update.ejs",{listing , originalUrl});
     
 };
 
@@ -72,7 +75,13 @@ module.exports.updateList =  async(req,res)=>{
     // if (!mongoose.Types.ObjectId.isValid(id)) {
     //      return res.status(400).send("Invalid ID format"); 
     // }
-    await Listing.findByIdAndUpdate(id,{...req.body.listing});
+    let listing = await Listing.findByIdAndUpdate(id,{...req.body.listing});
+    if(typeof req.file != "undefined"){
+        let url = req.file.path;
+        let filename = req.file.filename;
+        listing.image = {url,filename};
+        await listing.save();
+    }
     req.flash("success","Listing is Updated Successfully");
     res.redirect(`/listings/${id}`);
 };

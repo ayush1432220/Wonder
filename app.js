@@ -24,8 +24,19 @@ const passport = require("passport");
 const User = require("./models/user.js");
 const LocalStrategy = require("passport-local");
 const userRoute = require("./routes/user.js");
+const MongoStore = require("connect-mongo")
 
-
+const dbUrl = process.env.ATLAS_URL;
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    crypto: {
+        secret: process.env.SECRET
+      },
+      touchAfter: 24*3600,
+});
+store.on("error",()=>{
+    console.log("Error in mongo session")
+})
 
 
 app.set("view engine","ejs");
@@ -34,7 +45,8 @@ app.set("views", path.join(__dirname,"views"));
 app.engine("ejs", ejsMate);
 
 const sessionDescription = {
-    secret:"mySecretWonder",
+    store,
+    secret:process.env.SECRET,
     resave:false,
     saveUninitialized: true,  
     cookie : {
@@ -77,7 +89,7 @@ main()
 });
 
 async function main(){
-    await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust")
+    await mongoose.connect(dbUrl)
 }
 //isLogged import 
 // app.use((req, res, next) => {
@@ -91,13 +103,12 @@ app.use("/user",userRoute);
 app.listen(PORT,(req,res)=>{
     console.log("Server is created");
 });
-app.get("/",(req,res)=>{
-    res.send("Successfully created root path");
-});
+
 app.get("/showlist",async(req,res)=>{
     const allListings = await Listing.find({});
     res.render("./userView/showList.ejs",{allListings});
 });
+
 app.get("/showlist/:id/viewList",async(req,res)=>{
     let {id} = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) { return res.status(400).send("Invalid ID format"); 
@@ -105,6 +116,7 @@ app.get("/showlist/:id/viewList",async(req,res)=>{
     const listing = await Listing.findById(id).populate("reviews");
     res.render("./userView/viewList.ejs",{listing});
 });
+
 app.all("*",(req,res,next)=>{
     next(new expressError(404,"Page not Found"))
 })
