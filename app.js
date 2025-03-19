@@ -27,6 +27,8 @@ const userRoute = require("./routes/user.js");
 const MongoStore = require("connect-mongo")
 
 const dbUrl = process.env.ATLAS_URL;
+console.log(dbUrl);
+console.log(process.env.PORT);
 const store = MongoStore.create({
     mongoUrl: dbUrl,
     crypto: {
