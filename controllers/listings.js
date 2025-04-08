@@ -95,3 +95,39 @@ module.exports.deleteList = async(req,res)=>{
     res.redirect("/listings");
 };
 
+module.exports.book = async(req,res)=>{
+    let {id} = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) { return res.status(400).send("Invalid ID format"); 
+    }
+    const listing = await Listing.findById(id);
+    if(!listing){
+        req.flash("error","Listing not found");
+        return res.redirect("/listings");
+    }
+    res.render("listings/book.ejs",{listing});
+
+
+}
+
+
+exports.getListings = async (req, res) => {
+    console.log("Get Listings is called")
+    const { category } = req.query;
+    console.log(category);
+
+    let listings;
+    if (category) {
+        listings = await Listing.find({ category });
+    } else {
+        listings = await Listing.find({});
+    }
+
+    const categories = [
+        "Trending", "Rooms", "Hotels", "Mountains", "Beaches", 
+        "Arctic", "River Fronts", "Amazing Pools", 
+        "National Parks", "Camping"
+    ];
+
+    res.render("listings/filter", { listings, category, categories });
+};
+

@@ -32,7 +32,7 @@ console.log(process.env.PORT);
 const store = MongoStore.create({
     mongoUrl: dbUrl,
     crypto: {
-        secret: process.env.SECRET
+        secret: process.env.CLOUD_API_SECRET
       },
       touchAfter: 24*3600,
 });
@@ -48,7 +48,7 @@ app.engine("ejs", ejsMate);
 
 const sessionDescription = {
     store,
-    secret:process.env.SECRET,
+    secret:process.env.CLOUD_API_SECRET,
     resave:false,
     saveUninitialized: true,  
     cookie : {

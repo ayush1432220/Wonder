@@ -16,14 +16,12 @@ router.route("/")
 .get( wrapAsync(listingController.index))
 .post(isLoggedIn,upload.single("listing[image]"), validatListing,wrapAsync(listingController.newListing));
 
-
-
+router.get("/listings/filter", listingController.getListings);
 
 router.get("/new",isLoggedIn, listingController.renderIndex);
 
-
-router.route("/:id")
 //Show List
+router.route("/:id")
 .get(wrapAsync(listingController.showListing))
 //Update List 
 .put( isLoggedIn,isOwner,upload.single("listing[image]"), validatListing, wrapAsync(listingController.updateList))
@@ -34,5 +32,6 @@ router.route("/:id")
 // router.get("/new",isLoggedIn, listingController.renderIndex );
 //Show route
 router.get("/:id/edit",isLoggedIn,isOwner, wrapAsync(listingController.editForm) );
+router.get("/:id/booking",isLoggedIn, wrapAsync(listingController.book) );
 
 module.exports = router;

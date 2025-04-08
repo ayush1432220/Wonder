@@ -1,0 +1,42 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<!-- Category filter bar (scrollable) -->
+<div class="d-flex overflow-auto gap-2 px-3 py-2 border-bottom sticky-top bg-white z-3">
+  <% const categories = ["Trending", "Rooms", "Hotels", "Mountains", "Beaches", "Arctic", "River Fronts", "Amazing Pools", "National Parks", "Camping"]; %>
+  <% categories.forEach(cat => { %>
+    <button class="btn btn-outline-primary rounded-pill px-3">
+        <%= cat %>
+    </button>
+  <% }) %>
+</div>
+
+<!-- Listings Grid -->
+<div class="container mt-4">
+  <% if (listings.length === 0) { %>
+    <div class="text-center text-muted">😔 No listings found in this category.</div>
+  <% } else { %>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+      <% listings.forEach(listing => { %>
+        <div class="col">
+          <a href="/listings/<%= listing._id %>" class="text-decoration-none text-dark">
+            <div class="card shadow-sm border-0 h-100">
+              <img src="<%= listing.image.url %>" class="card-img-top rounded-top" alt="Image of <%= listing.title %>" style="height: 18rem; object-fit: cover;">
+              <div class="card-body">
+                <h5 class="card-title mb-1"><%= listing.title %></h5>
+                <p class="mb-1 text-muted">
+                  <i class="bi bi-geo-alt-fill me-1"></i><%= listing.location %>
+                </p>
+                <p class="mb-1 fw-semibold">
+                  <i class="bi bi-currency-rupee"></i><%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %> / night
+                </p>
+                <div class="text-warning small">
+                  <i class="bi bi-star-fill"></i> <%= listing.rating || "4.5" %> ★
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+</div>

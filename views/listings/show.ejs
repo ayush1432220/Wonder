@@ -44,6 +44,16 @@
                         </form>
                     </div>
                     <% } %>
+                    <% if(currUser && !listing.owner._id.equals(currUser._id)) {
+                    %>
+                    <div class="d-flex gap-2 mb-4">
+                        <a href="/listings/<%= listing._id %>/booking"
+                            class="btn btn-primary">
+                            <i class="fas fa-edit"></i> Book Now
+                        </a>
+                    </div>
+
+                    <% }%>
 
                     <hr>
                     <%if(currUser){ %>

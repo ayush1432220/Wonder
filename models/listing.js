@@ -17,9 +17,14 @@ const listSchema = new mongoose.Schema({
         filename : String,
         
     },
+    category : {
+        type : String,
+        enum : ["Trending", "Romms", "Hotels" , "Mountains" , "Beaches" , "Arctic", "River Front" ,"Amazing Pool" , "National Park" , "Camping" ],
+    },
     price : Number,
     location : String,
     country : String,
+
     reviews :[
         {
             type: Schema.Types.ObjectId,

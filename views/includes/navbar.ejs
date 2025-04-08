@@ -23,8 +23,14 @@
                 <% } %>
                 <% if(isLoggedIn){%>
                 <a class="nav-link px-3 py-2 me-md-2 nav-link-hover"
-                    href="/user/logout">Logout</a>
+                    href="/user/logout">
+                    <i class="fa-solid fa-user"></i>
+                    <%= currUser.username %>
+
+                </a>
+
                 <% } %>
+
             </div>
         </div>
     </div>

@@ -103,3 +103,6 @@ body{
     justify-content: space-around;
 }
 
+.material-symbols-outlined{
+    font-family: 'Courier New', Courier, monospace !important;
+}

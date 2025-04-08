@@ -1,0 +1,59 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<div class="row">
+    <div class="col-8 offset-2">
+        <form method="POST" action="/listings/<%listing._id%>/book" novalidate
+            class="needs-validation"
+            enctype="multipart/form-data">
+            <br>
+            <h1>Booking Form</h1>
+            <br>
+            <div class="mb-3">
+                <label for="title" class="form-label">FullName</label>
+                <input type="text" name="User[name]"
+                    placeholder="Enter the Your FullName" class="form-control"
+                    required>
+                <div class="invalid-feedback">Name is required</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="mobile" class="form-label">Mobile No.</label>
+                <input type="text" name="User[mobile]"
+                    placeholder="Enter the Description" class="form-control"
+                    required>
+                <div class="invalid-feedback">Mobile No. should be Valid!</div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email ID</label>
+                <input type="email" name="User[email]"
+                    placeholder="Enter the Email" class="form-control"
+                    required>
+                <div class="invalid-feedback">Email ID should be Valid!</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="Identity" class="form-label">Identity</label>
+                <select id="dropdown" name="Identity">
+                    <option value="option1">Aadhar Card</option>
+                    <option value="option2">Pan Card</option>
+                    <option value="option3">Voter ID</option>
+                </select>
+
+                <div class="invalid-feedback">Identity should be Valid!</div>
+
+            </div>
+            <div class="mb-3">
+                <label for="IdNumber" class="form-label">Enrollment No.</label>
+                <input type="text" name="User[IdNumber]"
+                    placeholder="Enter the Identity Number" class="form-control"
+                    required>
+                <div class="invalid-feedback">Identity Number should be
+                    Valid!</div>
+            </div>
+            <br><br>
+            <button class="subForm">Book Now</button>
+            <br><br>
+
+        </form>
+
+    </div>
+</div>

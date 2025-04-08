@@ -1,6 +1,81 @@
 <% layout("/layouts/boilerplate.ejs") %>
+<style>
+    .filters {
+        display: flex;
+        justify-content: space-around;
+        margin: 1rem 0;
+    }
+    .filter{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        opacity: 0.6;
+    }
+    .filter:hover{
+        opacity: 1;
+        transition: all 0.3s ease-in-out;
+    }
+  
+
+</style>
 <body>
-    <h1>All Listings</h1>
+
+    <div class="filters">
+        <div class="filter">
+            <div><a href="listings/filter?category=Trending"><i class="fa-solid fa-fire"></i></a></div>
+            <p>Trending</p>
+
+        </div>
+        <div class="filter">
+            <div><a href="listings/filter?category=Rooms"><i class="fa-regular fa-hospital"></i></a></div>
+            <p>Rooms</p>
+
+        </div>
+        <div class="filter">
+            <div><a href="listings/filter?category=Hotels"><i class="fa-solid fa-hotel"></i></a></div>
+            <p>Hotels</p>
+
+        </div>
+        <div class="filter">
+            <div><a href="listings/filter?category=Mountains"><i
+                        class="fa-solid fa-mountain-sun"></i></a></div>
+            <p>Mountains</p>
+
+        </div>
+        <div class="filter">
+            <div><a href="listings/filter?category=Beaches"><i
+                        class="fa-solid fa-umbrella-beach"></i></a></div>
+            <p>Beach</p>
+
+        </div>
+        <div class="filter">
+            <div><a href="listings/filter?category=Arctic"><i class="fa-solid fa-snowflake"></i></a></div>
+            <p>Arctic</p>
+
+        </div>
+        <div class="filter">
+            <div><a href="listings/filter?category=River Fronts"><i class="fa-solid fa-water"></i></a></div>
+            <p>River Fronts</p>
+
+        </div>
+        <div class="filter">
+            <div><a href="listings/filter?category=Amazing Pool"><i class="fa-solid fa-person-swimming"></i></a></div>
+            <p>Amazing Pools</p>
+        </div>
+        <div class="filter">
+            <div><a href="listings/filter?category=National Parks"><i class="fa-solid fa-tree"></i></a></div>
+            <p>National Parks</p>
+
+        </div>
+        <div class="filter">
+            <div><a href="listings/filter?category=Camping"><i class="fa-solid fa-campground"></i></a></div>
+            <p>Camping</p>
+
+        </div>
+    </div>
+
     <br>
     <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 ">
         <% for(listing of allListings){ %>
