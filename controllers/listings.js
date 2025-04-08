@@ -112,21 +112,20 @@ module.exports.book = async(req,res)=>{
 
 exports.getListings = async (req, res) => {
     console.log("Get Listings is called")
-    const { category } = req.query;
-    console.log(category);
-
-    let listings;
-    if (category) {
-        listings = await Listing.find({ category });
-    } else {
-        listings = await Listing.find({});
-    }
-
     const categories = [
         "Trending", "Rooms", "Hotels", "Mountains", "Beaches", 
         "Arctic", "River Fronts", "Amazing Pools", 
         "National Parks", "Camping"
     ];
+    const { category } = req.query;
+const selectedCategory = category?.trim();
+
+let listings;
+if (selectedCategory && categories.includes(selectedCategory)) {
+    listings = await Listing.find({ category: selectedCategory });
+} else {
+    listings = await Listing.find({});
+}
 
     res.render("listings/filter", { listings, category, categories });
 };
