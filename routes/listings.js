@@ -16,7 +16,7 @@ router.route("/")
 .get( wrapAsync(listingController.index))
 .post(isLoggedIn,upload.single("listing[image]"), validatListing,wrapAsync(listingController.newListing));
 
-router.get("/listings/filter", listingController.getListings);
+router.get("/filter", listingController.getListings);
 
 router.get("/new",isLoggedIn, listingController.renderIndex);
 
