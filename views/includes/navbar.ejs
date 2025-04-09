@@ -1,36 +1,57 @@
 <nav
-    class="navbar navbar-expand-md bg-light border-bottom sticky-top shadow-sm">
-    <div class="container-fluid">
-        <a class="navbar-brand fw-bold text-primary" href="/listings">
-            <i class="fa-regular fa-compass me-1"></i> WanderLust
+    class="navbar navbar-expand-md bg-white border-bottom sticky-top shadow-sm py-2">
+    <div class="container-fluid px-4">
+        <a class="navbar-brand fw-bold text-primary d-flex align-items-center"
+            href="/listings">
+            <i class="fa-regular fa-compass me-2 fs-4"></i>
+            <span class="fs-5">WanderLust</span>
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        <button class="navbar-toggler border-0 shadow-none" type="button"
+            data-bs-toggle="collapse"
             data-bs-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false"
-            aria-label="Toggle navigation">
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav ms-auto">
-                <!-- ms-auto pushes to the right -->
-                <a class="nav-link px-3 py-2 me-md-2 nav-link-hover"
-                    href="/listings">Explore</a>
-                <a class="nav-link px-3 py-2 me-md-2 nav-link-hover"
-                    href="/listings/new">Add New Listings</a>
-                <% if (!isLoggedIn) { %>
-                <a class="nav-link px-3 py-2 me-md-2 nav-link-hover"
-                    href="/user/login">Login/Register</a>
-                <% } %>
-                <% if(isLoggedIn){%>
-                <a class="nav-link px-3 py-2 me-md-2 nav-link-hover"
-                    href="/user/logout">
-                    <i class="fa-solid fa-user"></i>
-                    <%= currUser.username %>
 
+        <div class="collapse navbar-collapse justify-content-end"
+            id="navbarNavAltMarkup">
+            <div class="navbar-nav align-items-center">
+                <a
+                    class="nav-link px-3 py-2 me-md-1 text-dark fw-semibold nav-link-hover"
+                    href="/listings">
+                    <i class="fa-solid fa-magnifying-glass me-1"></i> Explore
+                </a>
+                <a
+                    class="nav-link px-3 py-2 me-md-1 text-dark fw-semibold nav-link-hover"
+                    href="/listings/new">
+                    <i class="fa-solid fa-plus me-1"></i> Add Listing
                 </a>
 
+                <% if (!isLoggedIn) { %>
+                <a class="btn btn-outline-primary px-3 py-1 me-md-2"
+                    href="/user/login">
+                    <i class="fa-solid fa-right-to-bracket me-1"></i> Login /
+                    Register
+                </a>
                 <% } %>
 
+                <% if (isLoggedIn) { %>
+                <div class="dropdown">
+                    <a class="btn btn-light border dropdown-toggle" href="#"
+                        role="button" id="dropdownMenuLink"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-user me-1"></i> <%=
+                        currUser.username %>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end"
+                        aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="/user/logout"><i
+                                    class="fa-solid fa-sign-out me-2"></i>
+                                Logout</a></li>
+                    </ul>
+                </div>
+                <% } %>
             </div>
         </div>
     </div>
